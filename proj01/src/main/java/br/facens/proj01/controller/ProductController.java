@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.facens.proj01.model.Product;
+import br.facens.proj01.dto.ProductDTO;
 import br.facens.proj01.service.ProductService;
 
 @RestController
@@ -21,8 +21,8 @@ public class ProductController {
     ProductService service;
 
     @GetMapping("/{id}")
-    public ResponseEntity<Product> getProduct(@PathVariable int id) {
-        Optional<Product> optional = service.geProduct(id);
+    public ResponseEntity<ProductDTO> getProduct(@PathVariable int id) {
+        Optional<ProductDTO> optional = service.geProduct(id);
 
         if(optional.isPresent()) {
             return ResponseEntity.ok(optional.get());
