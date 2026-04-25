@@ -10,15 +10,15 @@ import jakarta.persistence.Id;
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
     private String name;
     private double value;
     private String supplier;
-    
+
     public Product() {
     }
 
-    public Product(int id, String name, double value, String supplier) {
+    public Product(Integer id, String name, double value, String supplier) {
         this.id = id;
         this.name = name;
         this.value = value;
@@ -27,7 +27,7 @@ public class Product {
 
     public ProductDTO toDTO() {
         // return new ProductDTO(this);
-        return new ProductDTO(id, name, value);
+        return new ProductDTO(name, value, supplier);
     }
 
     public int getId() {
@@ -61,5 +61,5 @@ public class Product {
     public void setSupplier(String supplier) {
         this.supplier = supplier;
     }
-    
+
 }

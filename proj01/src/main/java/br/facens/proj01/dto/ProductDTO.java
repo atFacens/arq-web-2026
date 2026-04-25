@@ -3,28 +3,26 @@ package br.facens.proj01.dto;
 import br.facens.proj01.model.Product;
 
 public class ProductDTO {
-    private int id;
     private String name;
     private double value;
+    private String supplier;
 
-    public ProductDTO(int id, String name, double value) {
-        this.id = id;
+    public ProductDTO(){}
+    
+    public ProductDTO(String name, double value, String supplier) {
         this.name = name;
         this.value = value;
+        this.supplier = supplier;
     }
 
     public ProductDTO(Product product) {
-        this.id = product.getId();
         this.name = product.getName();
         this.value = product.getValue();
+        this.supplier = product.getSupplier();
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
+    public Product toProduct() {
+        return new Product(null, name, value, supplier);
     }
 
     public String getName() {
@@ -42,4 +40,13 @@ public class ProductDTO {
     public void setValue(double value) {
         this.value = value;
     }
+
+    public String getSupplier() {
+        return supplier;
+    }
+
+    public void setSupplier(String supplier) {
+        this.supplier = supplier;
+    }
+
 }

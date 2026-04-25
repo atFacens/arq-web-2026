@@ -1,5 +1,6 @@
 package br.facens.proj01.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,4 +30,29 @@ public class ProductService {
 
        return Optional.of(productDTO);
     }
+
+    public List<Product> getAll() {
+        return (List<Product>) repo.findAll();
+    }
+
+    public Product create(ProductDTO productDTO) {
+        return repo.save(productDTO.toProduct());
+    }
+
+    public boolean delete(int id) {
+        if(!repo.existsById(id)){
+            return false;
+        }
+        repo.deleteById(id);
+        return !repo.existsById(id);
+    }
+
+    public Product update(Product product, int id) {
+        if(id > 0 && repo.existsById(id)){
+            product.setId(id);
+            return repo.save(product);
+        }
+        return null;
+    }
+
 }
