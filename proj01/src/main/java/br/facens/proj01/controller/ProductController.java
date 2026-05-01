@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -33,7 +34,7 @@ public class ProductController {
     public ResponseEntity<ProductDTO> getProduct(@PathVariable int id) {
         Optional<ProductDTO> optional = service.geProduct(id);
 
-        if(optional.isPresent()) {
+        if (optional.isPresent()) {
             return ResponseEntity.ok(optional.get());
         }
         return ResponseEntity.notFound().build();
@@ -55,7 +56,7 @@ public class ProductController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable int id) {
-        if(service.delete(id)) {
+        if (service.delete(id)) {
             return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
         }
         return ResponseEntity.notFound().build();
@@ -64,10 +65,18 @@ public class ProductController {
     @PutMapping("/{id}")
     public ResponseEntity<Product> update(@RequestBody Product product, @PathVariable int id) {
         Product newProduct = service.update(product, id);
-        if(newProduct != null){
+        if (newProduct != null) {
             return ResponseEntity.ok(newProduct);
         }
         return ResponseEntity.badRequest().build();
     }
 
+    @PatchMapping("/{id}")
+    public ResponseEntity<Product> updatePatch(@RequestBody ProductDTO product, @PathVariable int id) {
+        Product newProduct = service.updatePath(product, id);
+        if (newProduct != null) {
+            return ResponseEntity.ok(newProduct);
+        }
+        return ResponseEntity.notFound().build();
+    }
 }

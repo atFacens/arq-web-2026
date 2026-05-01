@@ -4,7 +4,7 @@ import br.facens.proj01.model.Product;
 
 public class ProductDTO {
     private String name;
-    private double value;
+    private Double value;
     private String supplier;
 
     public ProductDTO(){}
@@ -33,11 +33,11 @@ public class ProductDTO {
         this.name = name;
     }
 
-    public double getValue() {
+    public Double getValue() {
         return value;
     }
 
-    public void setValue(double value) {
+    public void setValue(Double value) {
         this.value = value;
     }
 

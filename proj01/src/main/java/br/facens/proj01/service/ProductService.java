@@ -55,4 +55,27 @@ public class ProductService {
         return null;
     }
 
+    public Product updatePath(ProductDTO product, int id) {
+        if(id > 0) {
+            Optional<Product> productOpt = repo.findById(id);
+            if(productOpt.isEmpty()) {
+                return null;
+            }
+            Product productBD = productOpt.get();
+
+            if(product.getName() != null && product.getName().trim().length() > 0) {
+                productBD.setName(product.getName());
+            } 
+            if(product.getValue() != null && product.getValue() > 0) {
+                productBD.setValue(product.getValue());
+            }
+            if(product.getSupplier()!= null && product.getSupplier().trim().length() > 0) {
+                productBD.setSupplier(product.getSupplier());
+            }
+
+            return repo.save(productBD);
+        }
+        return null;
+    }
+
 }
