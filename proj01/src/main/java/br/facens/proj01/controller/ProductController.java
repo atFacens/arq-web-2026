@@ -79,4 +79,15 @@ public class ProductController {
         }
         return ResponseEntity.notFound().build();
     }
+
+    @GetMapping("/nome/{name}")
+    public ResponseEntity<List<Product>> getByName(@PathVariable String name) {
+        return ResponseEntity.ok( service.findByName(name) );
+    }
+
+    @GetMapping("/valor/{value}")
+    public ResponseEntity<List<Product>> getByValueLess(@PathVariable double value) {
+        return ResponseEntity.ok( service.findValueLessThan(value) );
+    }
+
 }

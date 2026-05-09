@@ -78,4 +78,14 @@ public class ProductService {
         return null;
     }
 
+    public List<Product> findByName(String nome) {
+        List<Product> lista = repo.findByNameLike("%" + nome.trim() + "%");
+        // System.out.println(lista);
+        return lista;
+    }
+
+    public List<Product> findValueLessThan(double value) {
+        return repo.findByValueLessThan(value);
+    }
+
 }
