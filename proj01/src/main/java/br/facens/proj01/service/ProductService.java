@@ -69,9 +69,9 @@ public class ProductService {
             if(product.getValue() != null && product.getValue() > 0) {
                 productBD.setValue(product.getValue());
             }
-            if(product.getSupplier()!= null && product.getSupplier().trim().length() > 0) {
-                productBD.setSupplier(product.getSupplier());
-            }
+            // if(product.getSupplier()!= null && product.getSupplier().trim().length() > 0) {
+            //     productBD.setSupplier(product.getSupplier());
+            // }
 
             return repo.save(productBD);
         }

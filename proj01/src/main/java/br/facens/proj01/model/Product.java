@@ -5,6 +5,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 
 @Entity
 public class Product {
@@ -13,12 +15,14 @@ public class Product {
     private Integer id;
     private String name;
     private double value;
-    private String supplier;
+    @ManyToOne
+    @JoinColumn(name = "id_supplier", nullable = false)
+    private Supplier supplier;
 
     public Product() {
     }
 
-    public Product(Integer id, String name, double value, String supplier) {
+    public Product(Integer id, String name, double value, Supplier supplier) {
         this.id = id;
         this.name = name;
         this.value = value;
@@ -27,7 +31,7 @@ public class Product {
 
     public ProductDTO toDTO() {
         // return new ProductDTO(this);
-        return new ProductDTO(name, value, supplier);
+        return new ProductDTO(name, value, supplier.getNome());
     }
 
     public int getId() {
@@ -55,10 +59,10 @@ public class Product {
     }
 
     public String getSupplier() {
-        return supplier;
+        return supplier.getNome();
     }
 
-    public void setSupplier(String supplier) {
+    public void setSupplier(Supplier supplier) {
         this.supplier = supplier;
     }
 
